@@ -77,4 +77,4 @@ The following line appears at the end of the createChartFromFile function in _cr
 
     # plt.show()
 
-Uncommenting ply.show() will display the chart in a window. Know that this is a blocking action and nothing else will run until the chart is dismissed. But it's helpful if you want to see the chart for testing purposes or to take a quick check before posting, etc. A chart image (dailychart.png) is dropped to same folder location as _createchart.py_ by this point already, fyi, so there's a local copy there as well.
+Uncommenting ply.show() will display the chart in a window. Know that this is a blocking action and nothing else will run until the chart is dismissed. But it's helpful if you want to see the chart for testing purposes or to take a quick check before posting, etc. A chart image (dailychart.png) is dropped to the same folder location as _createchart.py_ by this point already, fyi, so there's a local copy there as well.
