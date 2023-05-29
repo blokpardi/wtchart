@@ -101,38 +101,41 @@ def createChartFromFile(data):
     # includes the image in the chart. I found it was the best way to get
     # formatted text and place it in the chart where I wanted it.
 
-    # Read HTML-formatted text from another file
-    with open("data/bots.html", "r") as file:
-        html_content = file.read()
+    print(f"Notes: {config['notes']}")
 
-    # Specify options for the imgkit library (e.g., to set image width and height)
-    options = {"width": "200", "height": "200"}
+    if config["notes"]:
+        # Read HTML-formatted text from another file
+        with open("data/bots.html", "r") as file:
+            html_content = file.read()
 
-    # Convert HTML to an image using imgkit
-    image = imgkit.from_string(html_content, False, options=options)
+        # Specify options for the imgkit library (e.g., to set image width and height)
+        options = {"width": "200", "height": "200"}
 
-    # Create a BytesIO object to hold the image data
-    image_io = io.BytesIO(image)
+        # Convert HTML to an image using imgkit
+        image = imgkit.from_string(html_content, False, options=options)
 
-    # Open the image using PIL
-    pil_image = Image.open(image_io)
+        # Create a BytesIO object to hold the image data
+        image_io = io.BytesIO(image)
 
-    # Calculate the image size based on the plot size
-    box_width = 0.3
-    box_height = 0.1
+        # Open the image using PIL
+        pil_image = Image.open(image_io)
 
-    # Add the image to the plot
-    offset_image = OffsetImage(pil_image, zoom=1)
-    offset_image.image.axes = ax
-    ab = AnnotationBbox(
-        offset_image,
-        (0.00, 0.95),
-        xybox=(0, 0),
-        xycoords="axes fraction",
-        boxcoords="offset points",
-        box_alignment=(0, 1),
-    )
-    ax.add_artist(ab)
+        # Calculate the image size based on the plot size
+        box_width = 0.3
+        box_height = 0.1
+
+        # Add the image to the plot
+        offset_image = OffsetImage(pil_image, zoom=1)
+        offset_image.image.axes = ax
+        ab = AnnotationBbox(
+            offset_image,
+            (0.00, 0.95),
+            xybox=(0, 0),
+            xycoords="axes fraction",
+            boxcoords="offset points",
+            box_alignment=(0, 1),
+        )
+        ax.add_artist(ab)
 
     # Update the figure layout to accommodate the image
     plt.tight_layout()
@@ -246,7 +249,5 @@ data = pd.read_csv("data/WT Positions.csv")
 
 createChartFromFile(data)
 comments = commentary(data)
-
-# post to discord
 if config["posttodiscord"]:
     posttodiscord.createpost(comments)
