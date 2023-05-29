@@ -26,11 +26,13 @@ You'll need to have some basic familiarity with Python, have an environment wher
     * twill
     * discord
 
-I built this on Python 3.10.6
+I built this on Python 3.10.6. It's not setup as a virtual environment, but no reason you can't set it up that way if you want to.
 
 ### Config
 
-IT WILL NOT WORK UNLESS THE CONFIG IS SETUP CORRECTLY. The config file is _config.py_. Here are the parameters and their supported values:
+IT WILL NOT WORK UNLESS THE CONFIG IS SETUP CORRECTLY. At a minimum you need to include your WT username and password and a save location. The notes file is sample data, so that will display what's there unless you change it.
+
+The config file is _config.py_. Here are the parameters and their supported values:
 
 - _timezoneadjust_ - Since the community generally talks about trades in East Coast time I want to follow community patterns and "talk the talk" :-). So we adjust our output to match for those of us not on the East Coast. Put the number needed to adjust to EST. E.g. East Coast would be 0, West Coast would be 3.
 

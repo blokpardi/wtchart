@@ -1,7 +1,7 @@
 config = {
     "timezoneadjust": "0",  # put the number needed to adjust to EST. E.g. East Coast would be 0, West Coast would be 3.
     "startdate": "all",  # use 'all' to include the entire data set. otherwise set a date in the format 2023-01-01
-    "botfilter": "0 DTE",  # string to filter bots for the chart. use 'none' for no filter
+    "botfilter": "none",  # string to filter bots for the chart. use 'none' for no filter
     "notes": True,  # set to True if you want to include notes in a box in the upper left of the chart, False if not.
     "wtlogin": "https://whispertrades.com/login",
     "username": "user@email.com",  # your username
