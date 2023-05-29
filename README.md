@@ -1,4 +1,4 @@
-# Welcome
+## Welcome
 
 These Python scripts will let you create a chart from Whispertrade position data. It does several things:
 
@@ -7,7 +7,7 @@ These Python scripts will let you create a chart from Whispertrade position data
 3. Creates "commentary" - how much win or loss on the latest day, and notes the positions that stopped out.
 4. It can automatically post the chart and commentary to Discord.
 
-## How it works
+### How it works
 
 1. Setup the config (see _Config_ below)
 2. Setup your HTML file with bot info (see _Notes file_ below)
@@ -15,7 +15,7 @@ These Python scripts will let you create a chart from Whispertrade position data
 
 The script drops an image of the chart in the location of your script, and the commentary is output to the console. If you setup your config to post to Discord it will automatically create a post with the chart and commentary and post it to the Discord channel of your choice.
 
-## Setup
+### Setup
 
 You'll need to have some basic familiarity with Python, have an environment where you can run Python code, and install all the necessary libraries:
 
@@ -28,7 +28,7 @@ You'll need to have some basic familiarity with Python, have an environment wher
 
 I built this on Python 3.10.6
 
-## Config
+### Config
 
 IT WILL NOT WORK UNLESS THE CONFIG IS SETUP CORRECTLY. The config file is _config.py_. Here are the parameters and their supported values:
 
@@ -57,7 +57,7 @@ I put username and password in the config to keep them out of the code. Up to yo
 
 - _channel_id_ - Specify the discord channel ID for the channel where you want your post to appear. posttodiscord config must be set to True for this to have any effect.
 
-## Notes file
+### Notes file
 
 The _bots.html_ file contains the details of the bots included in the chart, and any corresponding notes. The content will appear in a box in the upper left side of the chart if it's turned on in your config. You should be comfortable with very basic HTML editing to change this, though following the formatting in the included example should work fine for most people.
 
@@ -70,7 +70,7 @@ The HTML can be changed to anything you want really, but just know that any chan
 
 The numbers are width, length.
 
-## Misc
+### Misc
 
 The following line appears at the end of the createChartFromFile function in _createchart.py_:
 
