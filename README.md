@@ -10,7 +10,7 @@ These Python scripts will let you create a chart from Whispertrade position data
 ### How it works
 
 1. Setup the config (see _Config_ below)
-2. Setup your HTML file with bot info (see _Notes file_ below)
+2. Setup your HTML file with bot info (see _Notes File_ below)
 3. Run _createchart.py_
 
 The script drops an image of the chart in the location of your script, and the commentary is output to the console. If you setup your config to post to Discord it will automatically create a post with the chart and commentary and post it to the Discord channel of your choice.
@@ -38,7 +38,7 @@ IT WILL NOT WORK UNLESS THE CONFIG IS SETUP CORRECTLY. The config file is _confi
 
 - _botfilter_ - Use this to filter bots for the chart. Use 'none' for no filter (it will include the entire dataset), or whatever text would filter the correct bots for your chart, e.g. "0 DTE". I built this to create a chart for 0DTE trades, and all my 0DTE bots include '0 DTE' in their names, so I use that filter when creating the chart. But any string will work here so you can create charts for any set of bots as long as your bot names have a consistent string to filter on.
 
-- _notes_ - Specifies whether to include the content of the bots.html file in the upper left of the chart (see _Notes file_ below). Set to True if you want to include notes, False if not.
+- _notes_ - Specifies whether to include the content of the bots.html file in the upper left of the chart (see _Notes File_ below). Set to True if you want to include notes, False if not.
 
 - _wtlogin_ - The login URL for Whispertrades "https://whispertrades.com/login". No need to change that unless WT makes a change.
 
@@ -57,7 +57,7 @@ I put username and password in the config to keep them out of the code. Up to yo
 
 - _channel_id_ - Specify the discord channel ID for the channel where you want your post to appear. posttodiscord config must be set to True for this to have any effect.
 
-### Notes file
+### Notes File
 
 The _bots.html_ file contains the details of the bots included in the chart, and any corresponding notes. The content will appear in a box in the upper left side of the chart if it's turned on in your config. You should be comfortable with very basic HTML editing to change this, though following the formatting in the included example should work fine for most people.
 
