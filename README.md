@@ -36,20 +36,20 @@ IT WILL NOT WORK UNLESS THE CONFIG IS SETUP CORRECTLY. The config file is _confi
 
 - _startdate_ - Use this if you want to start from any other date than the earliest found in the data file. Use 'all' to include the entire data set. Otherwise set a date in the format: 2023-01-01
 
-- _botfilter_ - Use this to filter bots for the chart. Use 'none' for no filter (it will include the entire dataset), or whatever text would filter the correct bots for your chart, e.g. "0 DTE". I built this to create a chart for 0DTE trades, and all my 0DTE bots include '0 DTE' in their names, so I use that filter when creating the chart. But any string will work here so you can create charts for any set of bots as long as the naming has a consistent string to filter on.
+- _botfilter_ - Use this to filter bots for the chart. Use 'none' for no filter (it will include the entire dataset), or whatever text would filter the correct bots for your chart, e.g. "0 DTE". I built this to create a chart for 0DTE trades, and all my 0DTE bots include '0 DTE' in their names, so I use that filter when creating the chart. But any string will work here so you can create charts for any set of bots as long as your bot names have a consistent string to filter on.
 
 - _notes_ - Specifies whether to include the content of the bots.html file in the upper left of the chart (see _Notes file_ below). Set to True if you want to include notes, False if not.
 
 - _wtlogin_ - The login URL for Whispertrades "https://whispertrades.com/login". No need to change that unless WT makes a change.
 
-I put these in the config to keep them out of the code. Up to you to make sure they are secret and safe!!!
+I put username and password in the config to keep them out of the code. Up to you to make sure they are secret and safe!!!
 
 - _username_ - Your Whispertrades login
 - _password_ - Your Whispertrades password
 
 - _csv_location_ - The URL to fetch the positions CSV file: "https://whispertrades.com/positions/export/". No need to change this unless WT makes a change.
 
-- _save_location_ - The location on your computer where you want to download the CSV file, e.g., "/home/myfolder/wtchart/data/WT Positions.csv". This sample location almost certainly will not work for you (it would be pretty odd if it did!), so make sure the location exists or you'll get an error.
+- _save_location_ - The location on your computer where you want to download the CSV file, e.g., "/home/myfolder/wtchart/data/WT Positions.csv". This sample location almost certainly will not work for you (it would be pretty odd if it did!), so make sure the location exists or you'll get an error. Note that the filename is included. You can change that to anything you want.
 
 - _posttodiscord_ - Set to true if you want to auto-post to discord. False if not.
 
@@ -67,6 +67,8 @@ The HTML can be changed to anything you want really, but just know that any chan
 
     # Create a figure and axis with adjusted width and height
     fig, ax = plt.subplots(figsize=(12, 8))
+
+The numbers are width, length.
 
 ## Misc
 
