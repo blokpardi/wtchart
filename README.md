@@ -65,16 +65,14 @@ The HTML is a simple table with two columns. The first column is a list of the b
 
 The HTML can be changed to anything you want really, but just know that any changes may not appear correctly on the chart and you'll have to make some size adjustments. This can be done in the HTML itself for things like column widths, etc. You may also have to change the size of the box on the chart. This can be done in the following line in _createchart.py_:
 
-    # Create a figure and axis with adjusted width and height
     fig, ax = plt.subplots(figsize=(12, 8))
 
-The numbers are width, length.
+The numbers are width, height.
 
 ### Misc
 
 The following line appears at the end of the createChartFromFile function in _createchart.py_:
 
-    # Show the plot. Uncomment this if you want a chart to display before generating the commentary.
     # plt.show()
 
 Uncommenting ply.show() will display the chart in a window. Know that this is a blocking action and nothing else will run until the chart is dismissed. But it's helpful if you want to see the chart for testing purposes or to take a quick check before posting, etc. A chart image (dailychart.png) is dropped to your script location by this point already, fyi, so there's a local copy there as well.
