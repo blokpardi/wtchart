@@ -13,7 +13,7 @@ These Python scripts will let you create a chart from Whispertrade position data
 2. Setup your HTML file with bot info (see _Notes File_ below)
 3. Run _createchart.py_
 
-The script drops an image of the chart in the location of your script, and the commentary is output to the console. If you setup your config to post to Discord it will automatically create a post with the chart and commentary and post it to the Discord channel of your choice.
+The script drops an image of the chart in the location the _createchart.py_ script, and the commentary is output to the console. If you setup your config to post to Discord it will automatically create a post with the chart and commentary and post it to the Discord channel of your choice.
 
 ### Setup
 
@@ -77,4 +77,4 @@ The following line appears at the end of the createChartFromFile function in _cr
 
     # plt.show()
 
-Uncommenting ply.show() will display the chart in a window. Know that this is a blocking action and nothing else will run until the chart is dismissed. But it's helpful if you want to see the chart for testing purposes or to take a quick check before posting, etc. A chart image (dailychart.png) is dropped to your script location by this point already, fyi, so there's a local copy there as well.
+Uncommenting ply.show() will display the chart in a window. Know that this is a blocking action and nothing else will run until the chart is dismissed. But it's helpful if you want to see the chart for testing purposes or to take a quick check before posting, etc. A chart image (dailychart.png) is dropped to same folder location as _createchart.py_ by this point already, fyi, so there's a local copy there as well.
