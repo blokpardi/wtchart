@@ -13,6 +13,7 @@ import imgkit
 from config import config
 import twill.commands as twill
 
+from markettime import markettime
 from posttodiscord import posttodiscord
 
 
@@ -226,28 +227,34 @@ whisper_trades_url = config["wtlogin"]
 csv_location = config["csv_location"]
 save_location = config["save_location"]
 
-# Connect to the whisper trades site
-twill.go(whisper_trades_url)
+if not markettime.marketopen:
+    # Connect to the whisper trades site
+    twill.go(whisper_trades_url)
 
-# Login to whisper trades
-twill.fv("1", "email", config["username"])
-twill.fv("1", "password", config["password"])
-twill.submit()
+    # Login to whisper trades
+    twill.fv("1", "email", config["username"])
+    twill.fv("1", "password", config["password"])
+    twill.submit()
 
-twill.go(csv_location)
-positions = twill.browser.html
+    twill.go(csv_location)
+    positions = twill.browser.html
 
-# Save the contents to a file
-file_path = save_location
-with open(file_path, "w") as file:
-    file.write(positions)
+    # Save the contents to a file
+    file_path = save_location
+    with open(file_path, "w") as file:
+        file.write(positions)
 
-print(f"File saved successfully at: {file_path}")
+    print(f"File saved successfully at: {file_path}")
 
-# Read the CSV file
-data = pd.read_csv("data/WT Positions.csv")
+    # Read the CSV file
+    data = pd.read_csv("data/WT Positions.csv")
 
-createChartFromFile(data)
-comments = commentary(data)
-if config["posttodiscord"]:
-    posttodiscord.createpost(comments)
+    createChartFromFile(data)
+    comments = commentary(data)
+    if config["posttodiscord"]:
+        posttodiscord.createpost(comments)
+
+else:
+    print(
+        f"The Market is open so we have incomplete data for today's trades. Please wait until the market is closed and try again."
+    )

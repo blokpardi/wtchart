@@ -34,5 +34,3 @@ class posttodiscord:
         )
 
         print(r)
-
-        print(f"Post from class: {comments}")
