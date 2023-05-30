@@ -13,7 +13,7 @@ These Python scripts will let you create a chart from Whispertrade position data
 2. Setup your HTML file with bot info (see _Notes File_ below)
 3. Run _createchart.py_
 
-The script drops an image of the chart in the location the _createchart.py_ script, and the commentary is output to the console. If you setup your config to post to Discord it will automatically create a post with the chart and commentary and post it to the Discord channel of your choice.
+The script drops an image of the chart in the location of the _createchart.py_ script, and the commentary is output to the console. If you setup your config to post to Discord it will automatically create a post with the chart and commentary and post it to the Discord channel of your choice.
 
 ### Setup
 
@@ -25,6 +25,7 @@ You'll need to have some basic familiarity with Python, have an environment wher
     * imgkit
     * twill
     * discord
+    * pytz
 
 I built this on Python 3.10.6. It's not setup as a virtual environment, but no reason you can't set it up that way if you want to.
 
@@ -65,13 +66,32 @@ The _bots.html_ file contains the details of the bots included in the chart, and
 
 The HTML is a simple table with two columns. The first column is a list of the bots represented in the chart. Obviously this is not automagic, you must put them in manually. Maybe someday I'll automate this, but it's manual right now. The second column is any notes related to that list of bots.
 
-The HTML can be changed to anything you want really, but just know that any changes may not appear correctly on the chart and you'll have to make some size adjustments. You can test changes quickly by turning on the chart display (see _Misc_ below). Adjustments can be made in the HTML itself for things like column widths, etc. You may also have to change the size of the box on the chart. This can be done in the following line in _createchart.py_:
+The HTML can be changed to anything you want really, but just know that any changes may not appear correctly on the chart and you'll have to make some size adjustments. You can test changes quickly by turning on the chart display (see _Chart preview_ in the _Misc_ section below). Adjustments can be made in the HTML itself for things like column widths, etc. You may also have to change the size of the box on the chart. This can be done in the following line in _createchart.py_:
 
     fig, ax = plt.subplots(figsize=(12, 8))
 
 The numbers are width, height.
 
 ### Misc
+
+**Using while Market is open**
+
+The WT position data is kept current during the day. That means that while there are open trades the data is incomplete. Rather than try and sort all that out, and only use the most up to date data (which I'm not sure is overly useful for this purpose), I'm checking to see if the market is open and will not run the chart creator if it is. Just wait until the market is closed and all open positions are updated. I'm using 4:25PM EST to be safe.
+
+- This is a binary check to see if it's currently market hours during weekdays, so not very sophisticated. For example, it does not check to see if you have any open positions and run if all positions are closed. It will just tell you to wait. :)
+- It does not account for holidays, etc. So if it is a Monday holiday, for example, and the Market would ordinarily be open, it will still not run the chart creator.
+
+If you want to force the code to run, just change the following line in _createchart.py_
+
+    if not markettime.marketopen:
+
+to
+
+    if markettime.marketopen:
+
+and it will run. You'll need to change it back for normal function during normal Market hours.
+
+**Chart preview**
 
 The following line appears at the end of the createChartFromFile function in _createchart.py_:
 
