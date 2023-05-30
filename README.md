@@ -38,11 +38,11 @@ The config file is _config.py_. Here are the parameters and their supported valu
 
 - _startdate_ - Use this if you want to start from any other date than the earliest found in the data file. Use 'all' to include the entire data set. Otherwise set a date in the format: 2023-01-01
 
-- _botfilter_ - Use this to filter bots for the chart. Use 'none' for no filter (it will include the entire dataset), or whatever text would filter the correct bots for your chart, e.g. "0 DTE". I built this to create a chart for 0DTE trades, and all my 0DTE bots include '0 DTE' in their names, so I use that filter when creating the chart. But any string will work here so you can create charts for any set of bots as long as your bot names have a consistent string to filter on.
+- _botfilter_ - Use this to filter bots for the chart. Use 'none' for no filter (it will include the entire dataset), or whatever text would filter the correct bots for your chart, e.g. "0 DTE". I built this to create a chart for 0 DTE trades, and all my 0 DTE bots include '0 DTE' in their names, so I use that filter when creating the chart. But any string will work here, so you can create charts for any set of bots as long as your bot names have a consistent string to filter on.
 
-- _notes_ - Specifies whether to include the content of the bots.html file in the upper left of the chart (see _Notes File_ below). Set to True if you want to include notes, False if not.
+- _notes_ - Specifies whether to include the content of the _bots.html_ file in the upper left of the chart (see _Notes File_ below). Set to True if you want to include notes, False if not.
 
-- _wtlogin_ - The login URL for Whispertrades "https://whispertrades.com/login". No need to change that unless WT makes a change.
+- _wtlogin_ - The login URL for Whispertrades "https://whispertrades.com/login". No need to change this unless WT makes a change.
 
 I put username and password in the config to keep them out of the code. Up to you to make sure they are secret and safe!!!
 
@@ -53,19 +53,19 @@ I put username and password in the config to keep them out of the code. Up to yo
 
 - _save_location_ - The location on your computer where you want to download the CSV file, e.g., "/home/myfolder/wtchart/data/WT Positions.csv". This sample location almost certainly will not work for you (it would be pretty odd if it did!), so make sure the location exists or you'll get an error. Note that the filename is included. You can change that to anything you want.
 
-- _posttodiscord_ - Set to true if you want to auto-post to discord. False if not.
+- _posttodiscord_ - Set to true if you want to auto-post to Discord, False if not.
 
 - _discord_authtoken_ - your Discord authorization token. Google if you don't know how to get it.
 
-- _channel_id_ - Specify the discord channel ID for the channel where you want your post to appear. posttodiscord config must be set to True for this to have any effect.
+- _channel_id_ - Specify the Discord channel ID for the channel where you want your post to appear. posttodiscord config must be set to True for this to have any effect, otherwise it's ignored.
 
 ### Notes File
 
 The _bots.html_ file contains the details of the bots included in the chart, and any corresponding notes. The content will appear in a box in the upper left side of the chart if it's turned on in your config. You should be comfortable with very basic HTML editing to change this, though following the formatting in the included example should work fine for most people.
 
-The HTML is a simple table with two columns. The first column is a list of the bots represented in the chart. This is not automagic, you must put them in manually. Maybe someday I'll automate this, but it's manual right now. The second column is any notes related to that list of bots.
+The HTML is a simple table with two columns. The first column is a list of the bots represented in the chart. Obviously this is not automagic, you must put them in manually. Maybe someday I'll automate this, but it's manual right now. The second column is any notes related to that list of bots.
 
-The HTML can be changed to anything you want really, but just know that any changes may not appear correctly on the chart and you'll have to make some size adjustments. This can be done in the HTML itself for things like column widths, etc. You may also have to change the size of the box on the chart. This can be done in the following line in _createchart.py_:
+The HTML can be changed to anything you want really, but just know that any changes may not appear correctly on the chart and you'll have to make some size adjustments. You can test changes quickly by turning on the chart display (see _Misc_ below). Adjustments can be made in the HTML itself for things like column widths, etc. You may also have to change the size of the box on the chart. This can be done in the following line in _createchart.py_:
 
     fig, ax = plt.subplots(figsize=(12, 8))
 
