@@ -227,7 +227,7 @@ whisper_trades_url = config["wtlogin"]
 csv_location = config["csv_location"]
 save_location = config["save_location"]
 
-if not markettime.marketopen:
+if not markettime.marketopen():
     # Connect to the whisper trades site
     twill.go(whisper_trades_url)
 
