@@ -70,8 +70,6 @@ The HTML can be changed to anything you want really, but just know that any chan
 
     options = { "width": 200, "height": 200, "format": "png", "quality": 100, }
 
-The numbers are width, height.
-
 ### Misc
 
 **Using while Market is open**
