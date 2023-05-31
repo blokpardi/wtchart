@@ -184,6 +184,7 @@ def commentary(df):
         formatted_profit = "+${:,.2f}".format(total_profit)
     else:
         formatted_profit = "-${:,.2f}".format(abs(total_profit))
+    formatted_profit += "."
 
     # Add negative 'Bot' values for negative profits. We do this to create the commentary
     # on what bots stopped out
@@ -207,9 +208,9 @@ def commentary(df):
         for index, row in negative_rows.iterrows():
             time = negative_times[index]
             if "PCS" in row["Bot"]:
-                negative_reasons.append(f"{time} PUT ")
+                negative_reasons.append(f"{time} put ")
             elif "CCS" in row["Bot"]:
-                negative_reasons.append(f"{time} CALL ")
+                negative_reasons.append(f"{time} call ")
 
     formatted_profit += " {}".format("and ".join(negative_reasons))
     if negative_bots:
