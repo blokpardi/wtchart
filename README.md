@@ -68,7 +68,7 @@ The HTML is a simple table with two columns. The first column is a list of the b
 
 The HTML can be changed to anything you want really, but just know that any changes may not appear correctly on the chart and you'll have to make some size adjustments. You can test changes quickly by turning on the chart display (see _Chart preview_ in the _Misc_ section below). Adjustments can be made in the HTML itself for things like column widths, etc. You may also have to change the size of the box on the chart. This can be done in the following line in _createchart.py_:
 
-    options = {"width": "200", "height": "200"}
+    options = { "width": 200, "height": 200, "format": "png", "quality": 100, }
 
 The numbers are width, height.
 

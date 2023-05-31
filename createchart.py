@@ -57,7 +57,7 @@ def createChartFromFile(data):
     grouped_data["Entry Time"] = date2num(pd.to_datetime(grouped_data["Entry Time"]))
 
     # Create a figure and axis with adjusted width and height
-    fig, ax = plt.subplots(figsize=(12, 8))
+    fig, ax = plt.subplots(figsize=(12, 8), dpi=300)
 
     # Plot the cumulative profit over time with smaller points
     ax.plot_date(
@@ -105,15 +105,17 @@ def createChartFromFile(data):
     print(f"Notes: {config['notes']}")
 
     if config["notes"]:
-        # Read HTML-formatted text from another file
-        with open("data/bots.html", "r") as file:
-            html_content = file.read()
-
         # Specify options for the imgkit library (e.g., to set image width and height)
-        options = {"width": "200", "height": "200"}
+        options = {
+            "width": 200,
+            "height": 200,
+            "format": "png",
+            "quality": 100,
+        }
 
         # Convert HTML to an image using imgkit
-        image = imgkit.from_string(html_content, False, options=options)
+        # image = imgkit.from_string(html_content, False, options=options)
+        image = imgkit.from_file("data/bots.html", False, options=options)
 
         # Create a BytesIO object to hold the image data
         image_io = io.BytesIO(image)
@@ -121,12 +123,8 @@ def createChartFromFile(data):
         # Open the image using PIL
         pil_image = Image.open(image_io)
 
-        # Calculate the image size based on the plot size
-        box_width = 0.3
-        box_height = 0.1
-
         # Add the image to the plot
-        offset_image = OffsetImage(pil_image, zoom=1)
+        offset_image = OffsetImage(pil_image, interpolation="bilinear", zoom=0.95)
         offset_image.image.axes = ax
         ab = AnnotationBbox(
             offset_image,
