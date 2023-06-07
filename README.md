@@ -43,6 +43,8 @@ The config file is _config.py_. Here are the parameters and their supported valu
 
 - _notes_ - Specifies whether to include the content of the _bots.html_ file in the upper left of the chart (see _Notes File_ below). Set to True if you want to include notes, False if not.
 
+- _noteslocation_ - The location on your computer where you keep your bots.html file. See _Notes File_ below for details on how to edit this.
+
 - _wtlogin_ - The login URL for Whispertrades "https://whispertrades.com/login". No need to change this unless WT makes a change.
 
 I put username and password in the config to keep them out of the code. Up to you to make sure they are secret and safe!!!

@@ -79,7 +79,7 @@ def createChartFromFile(data):
 
     # Create a custom formatter for the right y-axis to display profits in whole dollars
     def dollar_formatter(x, pos):
-        return "${:,.0f}".format(x)
+        return "${:,.0f}".format(int(x))
 
     # Set the formatter for the right y-axis
     ax.yaxis.set_major_formatter(FuncFormatter(dollar_formatter))
@@ -115,7 +115,8 @@ def createChartFromFile(data):
 
         # Convert HTML to an image using imgkit
         # image = imgkit.from_string(html_content, False, options=options)
-        image = imgkit.from_file("data/bots.html", False, options=options)
+        notes_location = config["noteslocation"]
+        image = imgkit.from_file(notes_location, False, options=options)
 
         # Create a BytesIO object to hold the image data
         image_io = io.BytesIO(image)
@@ -181,10 +182,10 @@ def commentary(df):
 
     # Prepend dollar sign and +/- sign based on the value
     if total_profit >= 0:
-        formatted_profit = "+${:,.2f}".format(total_profit)
+        formatted_profit = "+${:,}".format(int(total_profit))
     else:
-        formatted_profit = "-${:,.2f}".format(abs(total_profit))
-    formatted_profit += "."
+        formatted_profit = "-${:,}".format(abs(int(total_profit)))
+    formatted_profit += "\n"
 
     # Add negative 'Bot' values for negative profits. We do this to create the commentary
     # on what bots stopped out
@@ -212,7 +213,7 @@ def commentary(df):
             elif "CCS" in row["Bot"]:
                 negative_reasons.append(f"{time} call ")
 
-    formatted_profit += " {}".format("and ".join(negative_reasons))
+    formatted_profit += " {}".format(", ".join(negative_reasons))
     if negative_bots:
         formatted_profit += "stopped."
 
@@ -246,7 +247,7 @@ if not markettime.marketopen():
     print(f"File saved successfully at: {file_path}")
 
     # Read the CSV file
-    data = pd.read_csv("data/WT Positions.csv")
+    data = pd.read_csv(save_location)
 
     createChartFromFile(data)
     comments = commentary(data)
