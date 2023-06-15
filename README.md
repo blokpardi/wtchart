@@ -101,11 +101,11 @@ Uncommenting ply.show() will display the chart in a window. Know that this is a 
 
 ## Versions
 
-1.01 - Current
+1.01 - 6/15/2023 Current
 Change log:
 
 - Changed from using Entry Time to Exit Time aggregations
 - Fixed a start time bug
 - Removed redundant calc related to broker fee
 
-  1.0 - Intial commit
+  1.0 - 5/29/2023 Intial commit
