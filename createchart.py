@@ -18,54 +18,43 @@ from posttodiscord import posttodiscord
 
 
 def createChartFromFile(data):
-    # Convert 'Entry Time' column to datetime format
-    data["Entry Time"] = pd.to_datetime(data["Entry Time"])
+    # Convert 'Exit Time' column to datetime format
+    data["Exit Time"] = pd.to_datetime(data["Exit Time"])
 
     # Set the start date if specified in the config
     start_date = config["startdate"]
     if start_date != "all":
-        start_date = pd.to_datetime("2023-03-13")
-
         # Filter the data to include entries from the start date onwards
-        data = data[data["Entry Time"] >= start_date]
+        data = data[data["Exit Time"] >= start_date]
 
     # Filter the data if spedified in the config
     datafilter = config["botfilter"]
     if datafilter != "none":
         data = data[data["Bot"].str.contains("0 DTE")]
 
-    # Remove the '$' sign and commas from 'Profit $' and 'Broker Fee' columns, then convert to numeric
+    # Remove the '$' sign and commas from 'Profit $' then convert to numeric
     data["Profit $"] = (
         data["Profit $"].str.replace("$", "").str.replace(",", "").astype(float)
     )
-    data["Broker Fee"] = (
-        data["Broker Fee"].str.replace("$", "").str.replace(",", "").astype(float)
-    )
-
-    # Subtract broker fee from profit for each day
-    data["Profit $"] = data["Profit $"] - data["Broker Fee"]
 
     # Group the data by date and calculate the cumulative profit
     grouped_data = (
-        data.groupby(data["Entry Time"].dt.date)["Profit $"]
-        .sum()
-        .cumsum()
-        .reset_index()
+        data.groupby(data["Exit Time"].dt.date)["Profit $"].sum().cumsum().reset_index()
     )
 
     # Convert the dates to numerical values
-    grouped_data["Entry Time"] = date2num(pd.to_datetime(grouped_data["Entry Time"]))
+    grouped_data["Exit Time"] = date2num(pd.to_datetime(grouped_data["Exit Time"]))
 
     # Create a figure and axis with adjusted width and height
     fig, ax = plt.subplots(figsize=(12, 8), dpi=300)
 
     # Plot the cumulative profit over time with smaller points
     ax.plot_date(
-        grouped_data["Entry Time"], grouped_data["Profit $"], "o-", markersize=6
+        grouped_data["Exit Time"], grouped_data["Profit $"], "o-", markersize=6
     )
 
     # Set the labels and title
-    # ax.set_xlabel('Entry Time')
+    # ax.set_xlabel('Exit Time')
     # ax.set_ylabel('Cumulative Profit $')
     ax.set_title("0 DTE After Fees")
 
@@ -90,7 +79,7 @@ def createChartFromFile(data):
     ax.set_ylim(bottom=min_profit, top=max_profit)
 
     # Add a trendline
-    x = grouped_data["Entry Time"]
+    x = grouped_data["Exit Time"]
     y = grouped_data["Profit $"].values
     z = np.polyfit(x, y, 1)
     p = np.poly1d(z)
@@ -212,6 +201,8 @@ def commentary(df):
                 negative_reasons.append(f"{time} put ")
             elif "CCS" in row["Bot"]:
                 negative_reasons.append(f"{time} call ")
+            elif "IC" in row["Bot"]:
+                negative_reasons.append(f"{time} IC ")
 
     formatted_profit += " {}".format(", ".join(negative_reasons))
     if negative_bots:

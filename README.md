@@ -1,6 +1,6 @@
 ## Welcome
 
-These Python scripts will let you create a chart from Whispertrade position data. It does several things:
+These Python scripts will let you create a chart from Whispertrade position data. See versions and change log at the bottom. It does several things:
 
 1. It downloads the latest csv file from Whispertrades (WT Positions.csv).
 2. It creates a profit and loss chart using that data, as well as inserts a list of current bots and notes.
@@ -98,3 +98,14 @@ The following line appears at the end of the createChartFromFile function in _cr
     # plt.show()
 
 Uncommenting ply.show() will display the chart in a window. Know that this is a blocking action and nothing else will run until the chart is dismissed. But it's helpful if you want to see the chart for testing purposes or to take a quick check before posting, etc. A chart image (dailychart.png) is dropped to the same folder location as _createchart.py_ by the time it reaches this point in the code, so there's a local copy there as well.
+
+## Versions
+
+1.01 - Current
+Change log:
+
+- Changed from using Entry Time to Exit Time aggregations
+- Fixed a start time bug
+- Removed redundant calc related to broker fee
+
+  1.0 - Intial commit
